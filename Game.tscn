@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://coar7b4vcwoyn"]
+
+[ext_resource type="PackedScene" uid="uid://bcxrx5u68op22" path="res://player.tscn" id="1_3vln3"]
+[ext_resource type="Script" path="res://Game.gd" id="1_22h2v"]
+[ext_resource type="PackedScene" uid="uid://dypammkchujmx" path="res://ball.tscn" id="2_6ktfr"]
+[ext_resource type="Texture2D" uid="uid://dxq1phijvk7re" path="res://Space Background.png" id="4_x1tu7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lg5tf"]
+size = Vector2(1154, 149)
+
+[sub_resource type="SystemFont" id="SystemFont_r65rn"]
+font_names = PackedStringArray("Kohinoor Telugu")
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(-16, 8)
+script = ExtResource("1_22h2v")
+
+[node name="Top" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+position = Vector2(560, -88)
+shape = SubResource("RectangleShape2D_lg5tf")
+
+[node name="Bottom" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom"]
+position = Vector2(592, 728)
+shape = SubResource("RectangleShape2D_lg5tf")
+
+[node name="Left" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+position = Vector2(-61, 416)
+rotation = 1.56703
+shape = SubResource("RectangleShape2D_lg5tf")
+
+[node name="Right" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+position = Vector2(1216, 416)
+rotation = 1.56703
+shape = SubResource("RectangleShape2D_lg5tf")
+
+[node name="Player" parent="." instance=ExtResource("1_3vln3")]
+position = Vector2(112, 336)
+
+[node name="Player2" parent="." instance=ExtResource("1_3vln3")]
+position = Vector2(1032, 336)
+side = "p2"
+
+[node name="Ball" parent="." instance=ExtResource("2_6ktfr")]
+position = Vector2(584, 312)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 320.0
+offset_top = 8.0
+offset_right = 360.0
+offset_bottom = 31.0
+scale = Vector2(8.00555, 6.13613)
+theme_override_fonts/font = SubResource("SystemFont_r65rn")
+text = "0"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 776.0
+offset_right = 816.0
+offset_bottom = 23.0
+scale = Vector2(8.00555, 6.13613)
+theme_override_fonts/font = SubResource("SystemFont_r65rn")
+text = "0"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visibility_layer = 512
+z_index = -8
+z_as_relative = false
+offset_left = 24.0
+offset_top = -8.0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("4_x1tu7")
+
+[connection signal="body_entered" from="Top" to="." method="_on_top_body_entered"]
+[connection signal="body_entered" from="Bottom" to="." method="_on_bottom_body_entered"]
+[connection signal="body_entered" from="Left" to="." method="_on_left_body_entered"]
+[connection signal="body_entered" from="Right" to="." method="_on_right_body_entered"]
